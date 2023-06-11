@@ -63,7 +63,7 @@ const LogOut = () => {
       </div>
       <input
         type="submit"
-        value="Log In"
+        value="Register Now"
         className="mb-4 btn btn-outline w-full md:w-1/3 text-black hover:bg-green-600 hover:text-white"
       />
       <p>
