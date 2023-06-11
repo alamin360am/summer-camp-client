@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import Main from "./Layouts/Main";
-import Home from "./Pages/Home/Home";
+import Home from "./Pages/Home/Home/Home";
 import Instructors from "./Pages/Instructors/Instructors";
 import Classes from "./Pages/Classes/Classes";
 import Dashboard from "./Pages/Dashboard/Dashboard";
