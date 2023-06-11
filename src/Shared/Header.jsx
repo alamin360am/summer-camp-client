@@ -25,32 +25,22 @@ const Header = () => {
       </li>
       <li>
         <NavLink
+          to="/classes"
+          className={`text-lg hover:text-yellow-400 bg-transparent ${({
+            isActive,
+          }) => (isActive ? "active" : "")}`}
+        >
+          Classes
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/dashboard"
           className={`text-lg hover:text-yellow-400 bg-transparent ${({
             isActive,
           }) => (isActive ? "active" : "")}`}
         >
           Dashboard
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/menu"
-          className={`text-lg hover:text-yellow-400 bg-transparent ${({
-            isActive,
-          }) => (isActive ? "active" : "")}`}
-        >
-          Our Menu
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/shop"
-          className={`text-lg hover:text-yellow-400 bg-transparent ${({
-            isActive,
-          }) => (isActive ? "active" : "")}`}
-        >
-          Our Shop
         </NavLink>
       </li>
     </>
