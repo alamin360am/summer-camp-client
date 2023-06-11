@@ -6,7 +6,7 @@ const Header = () => {
       <li>
         <NavLink
           to="/"
-          className={`text-lg hover:text-yellow-400 bg-transparent ${({
+          className={`text-lg hover:text-green-600 bg-transparent ${({
             isActive,
           }) => (isActive ? "active" : "")}`}
         >
@@ -16,7 +16,7 @@ const Header = () => {
       <li>
         <NavLink
           to="/instructors"
-          className={`text-lg hover:text-yellow-400 bg-transparent ${({
+          className={`text-lg hover:text-green-600 bg-transparent ${({
             isActive,
           }) => (isActive ? "active" : "")}`}
         >
@@ -26,7 +26,7 @@ const Header = () => {
       <li>
         <NavLink
           to="/classes"
-          className={`text-lg hover:text-yellow-400 bg-transparent ${({
+          className={`text-lg hover:text-green-600 bg-transparent ${({
             isActive,
           }) => (isActive ? "active" : "")}`}
         >
@@ -36,7 +36,7 @@ const Header = () => {
       <li>
         <NavLink
           to="/dashboard"
-          className={`text-lg hover:text-yellow-400 bg-transparent ${({
+          className={`text-lg hover:text-green-600 bg-transparent ${({
             isActive,
           }) => (isActive ? "active" : "")}`}
         >
