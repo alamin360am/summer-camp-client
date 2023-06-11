@@ -1,0 +1,39 @@
+[
+    {
+      "name": "John Doe",
+      "photoUrl": "https://example.com/john-doe.jpg",
+      "email": "john.doe@example.com",
+      "numberOfClasses": 10
+    },
+    {
+      "name": "Jane Smith",
+      "photoUrl": "https://example.com/jane-smith.jpg",
+      "email": "jane.smith@example.com",
+      "numberOfClasses": 8
+    },
+    {
+      "name": "Michael Johnson",
+      "photoUrl": "https://example.com/michael-johnson.jpg",
+      "email": "michael.johnson@example.com",
+      "numberOfClasses": 12
+    },
+    {
+      "name": "Emily Davis",
+      "photoUrl": "https://example.com/emily-davis.jpg",
+      "email": "emily.davis@example.com",
+      "numberOfClasses": 5
+    },
+    {
+      "name": "Alex Brown",
+      "photoUrl": "https://example.com/alex-brown.jpg",
+      "email": "alex.brown@example.com",
+      "numberOfClasses": 7
+    },
+    {
+      "name": "Sarah Wilson",
+      "photoUrl": "https://example.com/sarah-wilson.jpg",
+      "email": "sarah.wilson@example.com",
+      "numberOfClasses": 9
+    }
+  ]
+  
