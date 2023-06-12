@@ -1,27 +1,36 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaUserCircle, FaEye, FaEyeSlash, FaEnvelope, FaKey, FaInfo, FaPhotoVideo, } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import useTitle from "../../Hook/useTitle";
 const SignUp = () => {
+  useTitle("Register");
+  const navigate = useNavigate()
   const [show, setShow] = useState(true);
   const [error, setError] = useState('')
   const { register, handleSubmit, watch, getValues, formState: { errors }, } = useForm();
-  const {createUser} = useContext(AuthContext);
+  const {createUser, updateUserProfile} = useContext(AuthContext);
 
   const onSubmit = (data) => {
     createUser(data.email, data.password)
     .then(result => {
       console.log(result.user);
-      setError('')
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Registration successful',
-        showConfirmButton: false,
-        timer: 1500
+      setError('');
+      updateUserProfile(data.name, data.photoURL)
+      .then(() =>{
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Registration successful',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        navigate('/');
       })
+      .catch(error => console.log(error))
+      
     })
     .catch(error => setError(error.message))
   };
