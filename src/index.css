@@ -13,17 +13,3 @@
     border-radius: 50%;
     margin-bottom: 1rem;
 }
-
-.heading {position: relative;}
-
-.heading::before {
-    content: '';
-    height: 100%;
-    width: 10px;
-    display: block;
-    position: absolute;
-    background: rgb(22 163 74);
-    top: 50%;
-    left: -20px;
-    transform: translateY(-45%);
-}
