@@ -1,34 +1,45 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 import { FaUserCircle, FaEye, FaEyeSlash, FaEnvelope, FaKey } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const LogIn = () => {
   const [show, setShow] = useState(true);
+  const { register, handleSubmit, formState: { errors }, } = useForm();
+  const {signIn} = useContext(AuthContext)
+
+  const onSubmit = (data) => {
+    console.log(data);
+    signIn(data.email, data.password)
+    .then(result => {
+      console.log(result.user);
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Registration successful',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
+  };
 
   return (
-    <form className="py-32 px-4 flex flex-col justify-center items-center bg-green-200 text-black">
+    <form onSubmit={handleSubmit(onSubmit)} className="py-32 px-4 flex flex-col justify-center items-center bg-green-200 text-black">
       <FaUserCircle className="icon"></FaUserCircle>
       <h2 className="text-3xl font-bold mb-4">Log In</h2>
-      <div className="relative w-full md:w-1/3">
-        <input
-          type="email"
-          placeholder="Input your Email"
-          className="p-3 pl-11 w-full rounded-md mb-4 bg-gray-100 focus:bg-white focus:outline-none text-black"
-        />
+      <div className="relative w-full md:w-1/3 mb-4">
+        <input type="email" {...register("email", { required: true })} name="email" placeholder="Input your Email" className="p-3 pl-11 w-full rounded-md bg-gray-100 focus:bg-white focus:outline-none text-black" />
+        {errors.email && <p className="text-red-500">Email is required</p>}
         <FaEnvelope className="absolute top-3 text-2xl text-green-600 left-2"></FaEnvelope>
       </div>
-      <div className="relative w-full md:w-1/3">
-        <input
-          type={show ? "password" : "text"}
-          placeholder="Input Password"
-          className="p-3 pl-11 w-full rounded-md mb-4 bg-gray-100 focus:bg-white focus:outline-none text-black"
-        />
+      <div className="relative w-full md:w-1/3 mb-4">
+        <input type={show ? "password" : "text"} {...register("password", {required: true})} name="password" placeholder="Input Password" className="p-3 pl-11 w-full rounded-md bg-gray-100 focus:bg-white focus:outline-none text-black" />
+        {errors.password && <p className="text-red-500">Password is required</p>}
         <FaKey className="absolute top-3 text-2xl text-green-600 left-2"></FaKey>
-        <div
-          onClick={() => setShow(!show)}
-          className="btn btn-xs absolute top-3 right-2"
-        >
-          {show ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>}
+        <div onClick={() => setShow(!show)} className="btn btn-xs absolute top-3 right-2" >
+        {show ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>}
         </div>
       </div>
       <input type="submit" value="Log In" className="mb-4 btn btn-outline w-full md:w-1/3 text-black hover:bg-green-600 hover:text-white" />
