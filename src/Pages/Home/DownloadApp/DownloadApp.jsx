@@ -4,7 +4,7 @@ import appStore from "./../../../assets/icon/appstore.png";
 
 const DownloadApp = () => {
   return (
-    <section className="my-10">
+    <section className="mb-10">
       <Heading title="Download Our App"></Heading>
       <div className="flex flex-col md:flex-row justify-evenly items-center gap-10">
         <div>
