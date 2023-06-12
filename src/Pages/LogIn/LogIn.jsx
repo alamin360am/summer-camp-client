@@ -4,8 +4,10 @@ import { FaUserCircle, FaEye, FaEyeSlash, FaEnvelope, FaKey } from "react-icons/
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import useTitle from "../../Hook/useTitle";
 
 const LogIn = () => {
+  useTitle("Log In")
   const [show, setShow] = useState(true);
   const [error, setError] = useState('')
   const { register, handleSubmit, formState: { errors }, } = useForm();
