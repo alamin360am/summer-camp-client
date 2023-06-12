@@ -92,7 +92,13 @@ const Header = () => {
             <ul className="menu menu-horizontal px-1 hidden lg:flex">
               {navOptions}
             </ul>
-            <div className="w-4 h-4 bg-slate-100 mr-4"></div>
+            
+              {
+                user? <div className="w-10 h-10 rounded-full overflow-hidden mr-4" title={user?.displayName}>
+                    <img src={user?.photoURL} alt="User Photo" />
+                  </div>: ''
+              }
+            
             {
               user ? <Link onClick={handleLogOut} className="btn btn-outline text-white hover:bg-green-700 hover:outline-none hover:text-white">Log Out</Link> :
               <Link to='/login' className="btn btn-outline text-white hover:bg-green-700 hover:outline-none hover:text-white">Log In</Link>
