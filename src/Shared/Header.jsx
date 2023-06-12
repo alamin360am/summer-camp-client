@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const Header = () => {
   const navOptions = (
@@ -45,6 +47,13 @@ const Header = () => {
       </li>
     </>
   );
+
+  const {logOut, user} = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut();
+  }
+
   return (
     <header>
       <nav className="px-6 py-2 fixed z-50 backdrop:blur-sm bg-opacity-30 max-w-screen-xl bg-black text-white left-1/2 translate-x-[-50%] w-full">
@@ -83,7 +92,11 @@ const Header = () => {
             <ul className="menu menu-horizontal px-1 hidden lg:flex">
               {navOptions}
             </ul>
-            <div className="w-4 h-4 bg-slate-100"></div>
+            <div className="w-4 h-4 bg-slate-100 mr-4"></div>
+            {
+              user ? <Link onClick={handleLogOut} className="btn btn-outline text-white hover:bg-green-700 hover:outline-none hover:text-white">Log Out</Link> :
+              <Link to='/login' className="btn btn-outline text-white hover:bg-green-700 hover:outline-none hover:text-white">Log In</Link>
+            }
           </div>
         </div>
       </nav>

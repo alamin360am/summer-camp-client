@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 
 const LogIn = () => {
   const [show, setShow] = useState(true);
+  const [error, setError] = useState('')
   const { register, handleSubmit, formState: { errors }, } = useForm();
   const {signIn} = useContext(AuthContext)
 
@@ -18,11 +19,12 @@ const LogIn = () => {
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Registration successful',
+        title: 'Log in successful',
         showConfirmButton: false,
         timer: 1500
       })
     })
+    .catch(error => setError(error.message))
   };
 
   return (
@@ -42,6 +44,7 @@ const LogIn = () => {
         {show ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>}
         </div>
       </div>
+      <p className="text-red-500">{error}</p>
       <input type="submit" value="Log In" className="mb-4 btn btn-outline w-full md:w-1/3 text-black hover:bg-green-600 hover:text-white" />
       <p>Don`t have any account? <Link to='/signup' className="text-green-600 font-bold">Sign up Now</Link> </p>
     </form>
