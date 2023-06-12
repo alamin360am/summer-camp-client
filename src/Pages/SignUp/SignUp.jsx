@@ -55,8 +55,9 @@ const SignUp = () => {
         {watch("password_repeat") !== watch("password") && getValues("password_repeat")  ? (<p className="text-red-500">password not match</p>) : null}
         <FaKey className="absolute top-3 text-2xl text-green-600 left-2"></FaKey>
       </div>
-      <div className="relative w-full md:w-1/3">
-        <input type="Text" placeholder="Photo URL" className="p-3 pl-11 w-full rounded-md mb-4 bg-gray-100 focus:bg-white focus:outline-none text-black" />
+      <div className="relative w-full md:w-1/3 mb-4">
+        <input {...register("photoURL", { required: true })} type="Text" placeholder="Photo URL" className="p-3 pl-11 w-full rounded-md bg-gray-100 focus:bg-white focus:outline-none text-black" />
+        {errors.photoURL && <p className="text-red-500">Photo URL is required</p>}
         <FaPhotoVideo className="absolute top-3 text-2xl text-green-600 left-2"></FaPhotoVideo>
       </div>
       <p className="text-red-500">{error}</p>

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaUserCircle, FaEye, FaEyeSlash, FaEnvelope, FaKey } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 
@@ -9,7 +9,10 @@ const LogIn = () => {
   const [show, setShow] = useState(true);
   const [error, setError] = useState('')
   const { register, handleSubmit, formState: { errors }, } = useForm();
-  const {signIn} = useContext(AuthContext)
+  const {signIn} = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
 
   const onSubmit = (data) => {
     console.log(data);
@@ -23,6 +26,7 @@ const LogIn = () => {
         showConfirmButton: false,
         timer: 1500
       })
+      navigate(from, {replace: true})
     })
     .catch(error => setError(error.message))
   };
