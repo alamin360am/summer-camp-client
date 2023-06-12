@@ -6,6 +6,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 const SignUp = () => {
   const [show, setShow] = useState(true);
+  const [error, setError] = useState('')
   const { register, handleSubmit, watch, getValues, formState: { errors }, } = useForm();
   const {createUser} = useContext(AuthContext);
 
@@ -13,6 +14,7 @@ const SignUp = () => {
     createUser(data.email, data.password)
     .then(result => {
       console.log(result.user);
+      setError('')
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -21,6 +23,7 @@ const SignUp = () => {
         timer: 1500
       })
     })
+    .catch(error => setError(error.message))
   };
 
   return (
@@ -56,6 +59,7 @@ const SignUp = () => {
         <input type="Text" placeholder="Photo URL" className="p-3 pl-11 w-full rounded-md mb-4 bg-gray-100 focus:bg-white focus:outline-none text-black" />
         <FaPhotoVideo className="absolute top-3 text-2xl text-green-600 left-2"></FaPhotoVideo>
       </div>
+      <p className="text-red-500">{error}</p>
       <input type="submit" value="Register Now" disabled={watch("password_repeat") !== watch("password") ? true : false} className="mb-4 btn btn-outline w-full md:w-1/3 text-black hover:bg-green-600 hover:text-white" />
       <p>
         Already have an account?{" "}
