@@ -10,14 +10,13 @@ const SignUp = () => {
   const {createUser} = useContext(AuthContext);
 
   const onSubmit = (data) => {
-    console.log(data);
     createUser(data.email, data.password)
     .then(result => {
       console.log(result.user);
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Registration successful',
+        title: 'Log In successful',
         showConfirmButton: false,
         timer: 1500
       })
@@ -39,8 +38,10 @@ const SignUp = () => {
         <FaEnvelope className="absolute top-3 text-2xl text-green-600 left-2"></FaEnvelope>
       </div>
       <div className="relative w-full md:w-1/3 mb-4">
-        <input type={show ? "password" : "text"} {...register("password", {required: true})} name="password" placeholder="Input Password" className="p-3 pl-11 w-full rounded-md bg-gray-100 focus:bg-white focus:outline-none text-black" />
-        {errors.password && <p className="text-red-500">Password is required</p>}
+        <input type={show ? "password" : "text"} {...register("password", {required: true, minLength: 6, pattern: /(?=.*[A-Z])(?=.*[!@#$&*])/})} name="password" placeholder="Input Password" className="p-3 pl-11 w-full rounded-md bg-gray-100 focus:bg-white focus:outline-none text-black" />
+        {errors.password?.type === 'required' && <p className="text-red-500">Password is required</p>}
+        {errors.password?.type === 'minLength' && <p className="text-red-500">Password must be minimum 6 characters</p>}
+        {errors.password?.type === 'pattern' && <p className="text-red-500">Must include one capital letter and one special character</p>}
         <FaKey className="absolute top-3 text-2xl text-green-600 left-2"></FaKey>
         <div onClick={() => setShow(!show)} className="btn btn-xs absolute top-3 right-2" >
         {show ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>}
