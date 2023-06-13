@@ -1,4 +1,3 @@
-
 const Heading = ({ title }) => {
   return (
     <div>

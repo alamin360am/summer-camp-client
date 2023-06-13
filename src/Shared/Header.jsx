@@ -56,7 +56,7 @@ const Header = () => {
 
   return (
     <header>
-      <nav className="px-6 py-2 fixed z-50 backdrop:blur-sm bg-opacity-30 max-w-screen-xl bg-black text-white left-1/2 translate-x-[-50%] w-full">
+      <nav className="px-6 py-2 fixed z-50 backdrop:blur-sm bg-opacity-70 max-w-screen-xl bg-black text-white left-1/2 translate-x-[-50%] w-full">
         <div className="flex justify-between items-center">
           <div>
             <div className="dropdown">

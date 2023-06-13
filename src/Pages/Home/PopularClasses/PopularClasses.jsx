@@ -8,8 +8,12 @@ const PopularClasses = () => {
     useEffect(()=>{
         fetch('http://localhost:5000/classes')
         .then(res => res.json())
-        .then(data => setClasses(data))
-    },[])
+        .then(data => {
+            const popular = data.slice(0, 6);
+            setClasses(popular);
+        });
+
+    },[]);
 
     return (
         <section className="my-10">
