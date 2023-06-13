@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const ClassCard = ({ singleClass }) => {
   const { photoUrl, title, numberOfStudents, availableSeats } = singleClass;
   return (
@@ -10,7 +12,7 @@ const ClassCard = ({ singleClass }) => {
         <p>Students: {numberOfStudents}</p>
         <p>Available Seats: {availableSeats}</p>
       </div>
-      <button className="btn btn-outline text-green-700 hover:bg-green-700 hover:outline-none hover:text-white">Select Class</button>
+      <Link to='/classes' className="btn btn-outline text-green-700 hover:bg-green-700 hover:outline-none hover:text-white">Select Class</Link>
     </div>
   );
 };

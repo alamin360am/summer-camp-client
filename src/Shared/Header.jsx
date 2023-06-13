@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../Hook/useCart";
+import Swal from "sweetalert2";
 
 const Header = () => {
   const [cart] = useCart();
@@ -61,7 +62,16 @@ const Header = () => {
   const { logOut, user } = useContext(AuthContext);
 
   const handleLogOut = () => {
-    logOut();
+    logOut()
+    .then(()=>{
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Log Out successful',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
   };
 
   return (
