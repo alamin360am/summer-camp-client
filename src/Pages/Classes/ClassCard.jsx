@@ -1,5 +1,53 @@
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
+
 const ClassCard = ({ singleClass }) => {
-  const { photoUrl, title, numberOfStudents, instructorName, availableSeats, price } = singleClass;
+  const { photoUrl, title, numberOfStudents, instructorName, availableSeats, price, _id } = singleClass;
+  const {user} = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation()
+
+  const handleAddCart = item => {
+    console.log(item);
+    if(user && user.email) {
+      const selectClass = {classId: _id, title, photoUrl, price, email: user.email}
+      fetch('http://localhost:5000/carts', {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(selectClass)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.insertedId) {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Class has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        } 
+      })
+    } else {
+      Swal.fire({
+        title: 'Please Log in first',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Log In'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/login', {state: {from: location}})
+        }
+      })
+    }
+  }
+
   return (
     <div className="flex flex-col items-center p-4 bg-white rounded-lg">
       <figure className="w-96 h-full mb-4">
@@ -12,7 +60,7 @@ const ClassCard = ({ singleClass }) => {
         <p>Available Seats: {availableSeats}</p>
       </div>
       <p className="text-2xl mb-4">Price: <span className="text-green-600 font-bold">${price}</span></p>
-      <button className="btn btn-outline text-green-700 hover:bg-green-700 hover:outline-none hover:text-white">
+      <button onClick={()=> handleAddCart(singleClass)} className="btn btn-outline text-green-700 hover:bg-green-700 hover:outline-none hover:text-white">
         Select Class
       </button>
     </div>
