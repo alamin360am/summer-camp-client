@@ -50,8 +50,33 @@ const AllUsers = () => {
       });
   };
 
-  const handleDelete = (user) => {
-    console.log(user);
+  const handleDelete = (id) => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to delete this user!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`http://localhost:5000/users/${id}`, {
+            method: 'DELETE'
+          })
+          .then(res => res.json())
+          .then(data => {
+            if(data.deletedCount > 0) {
+                refetch();
+                Swal.fire(
+                    'Deleted!',
+                    'User deleted.',
+                    'success'
+                  )
+              }
+          })
+        }
+      })
   };
 
   return (
@@ -106,7 +131,7 @@ const AllUsers = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handleDelete(user)}
+                    onClick={() => handleDelete(user._id)}
                     className="btn btn-warning text-white bg-red-500 btn-xs outline-none border-none"
                   >
                     Delete
