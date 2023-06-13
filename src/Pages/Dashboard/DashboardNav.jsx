@@ -2,33 +2,58 @@ import { NavLink } from "react-router-dom";
 import useCart from "../../Hook/useCart";
 
 const DashboardNav = () => {
-  const [cart] = useCart()
+  const [cart] = useCart();
+
+  // TODO: load data from server
+  const isAdmin = true;
+  const isStudent = false;
+
   return (
     <div className="w-72 h-screen bg-green-600 p-10 dashboard-nav flex flex-col">
-      <NavLink
-        to="dashboard"
-        className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
-      >
-        User Home
-      </NavLink>
-      <NavLink
-        to="enroll"
-        className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
-      >
-        Enroll Classes
-      </NavLink>
-      <NavLink
-        to="selected-classes"
-        className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
-      >
-        Selected Classes <span>{`(${cart.length})`}</span>
-      </NavLink>
-      <NavLink
-        to="payment"
-        className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
-      >
-        Payment
-      </NavLink>
+      {isAdmin && (
+        <>
+          <NavLink
+            to="dashboard"
+            className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
+          >
+            Admin Home
+          </NavLink>
+          <NavLink
+            to="users"
+            className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
+          >
+            All Users
+          </NavLink>
+        </>
+      )}
+      {isStudent && (
+        <>
+          <NavLink
+            to="dashboard"
+            className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
+          >
+            User Home
+          </NavLink>
+          <NavLink
+            to="enroll"
+            className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
+          >
+            Enroll Classes
+          </NavLink>
+          <NavLink
+            to="selected-classes"
+            className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
+          >
+            Selected Classes <span>{`(${cart.length})`}</span>
+          </NavLink>
+          <NavLink
+            to="payment"
+            className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
+          >
+            Payment
+          </NavLink>
+        </>
+      )}
       <div className="divider"></div>
       <NavLink
         to="/"

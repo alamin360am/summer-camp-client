@@ -20,6 +20,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import AllUsers from "./Pages/Dashboard/AllUsers/AllUsers";
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
         path: "payment",
         element: <Payment></Payment>,
       },
+      {
+        path: "users",
+        element: <AllUsers></AllUsers>
+      }
     ],
   },
 ]);
