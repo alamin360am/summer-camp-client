@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import useTitle from "../../Hook/useTitle";
+import SocialLogIn from "../../Component/SocialLogIn/SocialLogIn";
 
 const LogIn = () => {
   useTitle("Log In")
@@ -53,6 +54,7 @@ const LogIn = () => {
       <p className="text-red-500">{error}</p>
       <input type="submit" value="Log In" className="mb-4 btn btn-outline w-full md:w-1/3 text-black hover:bg-green-600 hover:text-white" />
       <p>Don`t have any account? <Link to='/signup' className="text-green-600 font-bold">Sign up Now</Link> </p>
+      <SocialLogIn></SocialLogIn>
     </form>
   );
 };
