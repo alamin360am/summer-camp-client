@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.active {
+nav .active {
     color: rgb(22 163 74);
+}
+
+.dashboard-nav .active {
+    background: rgb(7, 99, 41);
 }
 
 .icon {

@@ -10,8 +10,12 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import LogIn from "./Pages/LogIn/LogIn";
 import SignUp from "./Pages/SignUp/SignUp";
 import AuthProvider from "./Providers/AuthProvider";
-import PrivateRoutes from "./Routes/PrivateRoutes";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage";
+import DashboardLayout from "./Layouts/DashboardLayout";
+import SelectedClass from "./Pages/Dashboard/SelectedClass/SelectedClass";
+import PrivateRoutes from "./Routes/PrivateRoutes";
+import EnrollClass from "./Pages/Dashboard/Enroll Classes/EnrollClass";
+import Payment from "./Pages/Dashboard/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -32,10 +36,6 @@ const router = createBrowserRouter([
         element: <Classes></Classes>,
       },
       {
-        path: "/dashboard",
-        element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
-      },
-      {
         path: "/login",
         element: <LogIn></LogIn>,
       },
@@ -45,6 +45,28 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: 'dashboard',
+    element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
+    children: [
+      {
+        path: '',
+        element: <Dashboard></Dashboard>
+      },
+      {
+        path: 'selected-classes',
+        element: <SelectedClass></SelectedClass>
+      },
+      {
+        path: 'enroll',
+        element: <EnrollClass></EnrollClass>
+      },
+      {
+        path: 'payment',
+        element: <Payment></Payment>
+      }
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
