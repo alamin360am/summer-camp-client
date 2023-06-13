@@ -1,13 +1,15 @@
 import { NavLink } from "react-router-dom";
+import useCart from "../../Hook/useCart";
 
 const DashboardNav = () => {
+  const [cart] = useCart()
   return (
     <div className="w-72 h-screen bg-green-600 p-10 dashboard-nav flex flex-col">
       <NavLink
         to="dashboard"
         className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
       >
-        Dashboard Home
+        User Home
       </NavLink>
       <NavLink
         to="enroll"
@@ -19,7 +21,7 @@ const DashboardNav = () => {
         to="selected-classes"
         className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
       >
-        Selected Classes
+        Selected Classes <span>{`(${cart.length})`}</span>
       </NavLink>
       <NavLink
         to="payment"
