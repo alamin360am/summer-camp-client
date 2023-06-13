@@ -1,8 +1,12 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../Hook/useCart";
 
 const Header = () => {
+  const [cart] = useCart();
+  
   const navOptions = (
     <>
       <li>
@@ -45,14 +49,20 @@ const Header = () => {
           Dashboard
         </NavLink>
       </li>
+      <li>
+        <Link to="/dashboard/selected-classes" className="btn btn-primary bg-gray-200 border-none dashboard-btn mx-2 flex content-center">
+          <FaShoppingCart className="text-green-700 text-base"></FaShoppingCart>
+          <div className="text-green-700">+{cart?.length || 0}</div>
+        </Link>
+      </li>
     </>
   );
 
-  const {logOut, user} = useContext(AuthContext);
+  const { logOut, user } = useContext(AuthContext);
 
   const handleLogOut = () => {
     logOut();
-  }
+  };
 
   return (
     <header>
@@ -84,25 +94,40 @@ const Header = () => {
               </ul>
             </div>
             <Link to="/" className="text-lg font-bold">
-              Summer{" "}
-              <span className="font-light hidden lg:block">Camp</span>
+              Summer <span className="font-light hidden lg:block">Camp</span>
             </Link>
           </div>
           <div className="flex items-center">
             <ul className="menu menu-horizontal px-1 hidden lg:flex">
               {navOptions}
             </ul>
-            
-              {
-                user? <div className="w-10 h-10 rounded-full overflow-hidden mr-4" title={user?.displayName}>
-                    <img src={user?.photoURL} alt="User Photo" />
-                  </div>: ''
-              }
-            
-            {
-              user ? <Link onClick={handleLogOut} className="btn btn-outline text-white hover:bg-green-700 hover:outline-none hover:text-white">Log Out</Link> :
-              <Link to='/login' className="btn btn-outline text-white hover:bg-green-700 hover:outline-none hover:text-white">Log In</Link>
-            }
+
+            {user ? (
+              <div
+                className="w-10 h-10 rounded-full overflow-hidden mr-4"
+                title={user?.displayName}
+              >
+                <img src={user?.photoURL} alt="User Photo" />
+              </div>
+            ) : (
+              ""
+            )}
+
+            {user ? (
+              <Link
+                onClick={handleLogOut}
+                className="btn btn-outline text-white hover:bg-green-700 hover:outline-none hover:text-white"
+              >
+                Log Out
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="btn btn-outline text-white hover:bg-green-700 hover:outline-none hover:text-white"
+              >
+                Log In
+              </Link>
+            )}
           </div>
         </div>
       </nav>

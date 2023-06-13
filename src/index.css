@@ -17,3 +17,7 @@ nav .active {
     border-radius: 50%;
     margin-bottom: 1rem;
 }
+
+.dashboard-btn:hover {
+    background-color: rgb(209 213 219) !important;
+}

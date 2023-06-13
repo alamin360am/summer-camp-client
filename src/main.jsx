@@ -16,6 +16,11 @@ import SelectedClass from "./Pages/Dashboard/SelectedClass/SelectedClass";
 import PrivateRoutes from "./Routes/PrivateRoutes";
 import EnrollClass from "./Pages/Dashboard/Enroll Classes/EnrollClass";
 import Payment from "./Pages/Dashboard/Payment/Payment";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -46,35 +51,41 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: 'dashboard',
-    element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
+    path: "dashboard",
+    element: (
+      <PrivateRoutes>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoutes>
+    ),
     children: [
       {
-        path: '',
-        element: <Dashboard></Dashboard>
+        path: "",
+        element: <Dashboard></Dashboard>,
       },
       {
-        path: 'selected-classes',
-        element: <SelectedClass></SelectedClass>
+        path: "selected-classes",
+        element: <SelectedClass></SelectedClass>,
       },
       {
-        path: 'enroll',
-        element: <EnrollClass></EnrollClass>
+        path: "enroll",
+        element: <EnrollClass></EnrollClass>,
       },
       {
-        path: 'payment',
-        element: <Payment></Payment>
-      }
-    ]
-  }
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <div className="max-w-screen-xl mx-auto p-4 md:p-0">
-        <RouterProvider router={router} />
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <div className="max-w-screen-xl mx-auto p-4 md:p-0">
+          <RouterProvider router={router} />
+        </div>
+      </QueryClientProvider>
     </AuthProvider>
   </React.StrictMode>
 );
