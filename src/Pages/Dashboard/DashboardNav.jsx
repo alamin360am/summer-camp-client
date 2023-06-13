@@ -1,16 +1,20 @@
 import { NavLink } from "react-router-dom";
 import useCart from "../../Hook/useCart";
+import useAdmin from "../../Hook/useAdmin";
+import useInstructor from "../../Hook/useInstructor";
 
 const DashboardNav = () => {
   const [cart] = useCart();
-
-  // TODO: load data from server
-  const isAdmin = true;
-  const isStudent = false;
+  const [isAdmin] = useAdmin();
+  const admin = isAdmin?.admin;
+  // const admin = true;
+  const [isInstructor] = useInstructor();
+  const instructor = isInstructor?.instructor;
+  // const instructor = false;
 
   return (
     <div className="w-72 h-screen bg-green-600 p-10 dashboard-nav flex flex-col">
-      {isAdmin && (
+      {admin && (
         <>
           <NavLink
             to="dashboard"
@@ -26,13 +30,29 @@ const DashboardNav = () => {
           </NavLink>
         </>
       )}
-      {isStudent && (
+      {instructor && (
         <>
           <NavLink
             to="dashboard"
             className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
           >
-            User Home
+            Instructor Home
+          </NavLink>
+          <NavLink
+            to="add-class"
+            className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
+          >
+            Add Classes
+          </NavLink>
+        </>
+      )}
+      {admin == false && instructor == false && (
+        <>
+          <NavLink
+            to="dashboard"
+            className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
+          >
+            Student Home
           </NavLink>
           <NavLink
             to="enroll"
