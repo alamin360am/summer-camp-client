@@ -41,7 +41,7 @@ const Header = () => {
       </li>
       <li>
         <NavLink
-          to="/dashboard"
+          to="/dashboard/dashboard"
           className={`text-lg hover:text-green-600 bg-transparent ${({
             isActive,
           }) => (isActive ? "active" : "")}`}
