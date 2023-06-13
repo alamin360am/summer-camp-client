@@ -1,8 +1,10 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useCart from "../../Hook/useCart";
+import useAdmin from "../../Hook/useAdmin";
+import useInstructor from "../../Hook/useInstructor";
 
 const ClassCard = ({ singleClass }) => {
   const { photoUrl, title, numberOfStudents, instructorName, availableSeats, price, _id } = singleClass;
@@ -10,6 +12,21 @@ const ClassCard = ({ singleClass }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [, refetch] = useCart();
+  const [isAdmin] = useAdmin();
+  const admin = isAdmin?.admin;
+  const [isInstructor] = useInstructor();
+  const instructor = isInstructor?.instructor;
+
+  const [disable, setDisable] = useState(true);
+
+  useEffect(()=>{
+    if(admin == false && instructor == false) {
+      setDisable(false)
+    }
+    if(instructor == true) {
+      setDisable(true)
+    }
+  },[admin, instructor])
 
   const handleAddCart = item => {
     console.log(item);
@@ -52,7 +69,7 @@ const ClassCard = ({ singleClass }) => {
   }
 
   return (
-    <div className="flex flex-col items-center p-4 bg-white rounded-lg">
+    <div className={`flex flex-col items-center p-4 ${availableSeats == 0 ? 'bg-red-400' : 'bg-white'} rounded-lg`}>
       <figure className="w-96 h-full mb-4">
         <img src={photoUrl} alt="" className="w-full rounded-lg" />
       </figure>
@@ -63,9 +80,11 @@ const ClassCard = ({ singleClass }) => {
         <p>Available Seats: {availableSeats}</p>
       </div>
       <p className="text-2xl mb-4">Price: <span className="text-green-600 font-bold">${price}</span></p>
-      <button onClick={()=> handleAddCart(singleClass)} className="btn btn-outline text-green-700 hover:bg-green-700 hover:outline-none hover:text-white">
+      {
+        <button onClick={()=> handleAddCart(singleClass)} disabled={disable} className="btn btn-outline text-green-700 hover:bg-green-700 hover:outline-none hover:text-white">
         Select Class
       </button>
+      }
     </div>
   );
 };
