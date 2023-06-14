@@ -2,14 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import Heading from "../../../Component/Heading/Heading";
+import { Link } from "react-router-dom";
 
 // http://localhost:5000/added_classes?email=sakib@khan.com
 const MyClass = () => {
     const {user} = useContext(AuthContext)
-    const { data: added_classes = [], refetch } = useQuery(["added_classes"], async () => {
+    const { data: added_classes = [] } = useQuery(["added_classes"], async () => {
         const respond = await fetch(`http://localhost:5000/added_classes?email=${user?.email}`)
         return respond.json();
       });
+
+
+
     return (
         <section className="p-10">
             <Heading title={"My Classes"}></Heading>
@@ -57,7 +61,7 @@ const MyClass = () => {
                   <button className="btn btn-warning text-white bg-blue-500 btn-xs outline-none border-none" disabled={added_class?.status == "denied" ? false : true}>Feedback</button>
                 </th>
                 <th>
-                  <button className="btn btn-warning text-white bg-blue-500 btn-xs outline-none border-none" disabled={added_class?.status ? true : false}>Update</button>
+                  <Link to={`/dashboard/update/${added_class._id}`} className="btn btn-warning text-white bg-orange-500 btn-xs outline-none border-none" disabled={added_class?.status ? true : false}>Update</Link>
                 </th>
               </tr>
             ))}

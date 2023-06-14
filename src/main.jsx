@@ -24,6 +24,7 @@ import AllUsers from "./Pages/Dashboard/AllUsers/AllUsers";
 import AddClass from "./Pages/Dashboard/AddClass/AddClass";
 import ManageClasses from "./Pages/Dashboard/ManageClasses/ManageClasses";
 import MyClass from "./Pages/Dashboard/MyClass/MyClass";
+import UpdateClass from "./Pages/Dashboard/UpdateClass/UpdateClass";
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
@@ -93,6 +94,11 @@ const router = createBrowserRouter([
       {
         path: 'my-class',
         element: <MyClass></MyClass>
+      },
+      {
+        path: 'update/:id',
+        element: <UpdateClass></UpdateClass>,
+        loader: ({params}) => fetch(`http://localhost:5000/added_classes/${params.id}`)
       }
     ],
   },
