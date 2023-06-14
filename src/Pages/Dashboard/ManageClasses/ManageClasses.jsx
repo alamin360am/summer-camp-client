@@ -21,7 +21,40 @@ const ManageClasses = () => {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: "Make admin successfully",
+            title: "Class approved successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+      
+      fetch('http://localhost:5000/classes', {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(classes)
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      })
+
+
+    }
+
+    const handleDenied = classes => {
+      fetch(`http://localhost:5000/added_classes/denied/${classes._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Class denied successfully",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -80,13 +113,13 @@ const ManageClasses = () => {
                   </p>
                 </td>
                 <th>
-                  <button onClick={()=>handleApprove(added_class)} className="btn btn-primary bg-green-600 btn-xs outline-none border-none">Approve</button>
+                  <button onClick={()=>handleApprove(added_class)} className="btn btn-primary bg-green-600 btn-xs outline-none border-none" disabled={added_class?.status ? true : false}>Approve</button>
                 </th>
                 <th>
-                  <button className="btn btn-warning text-white bg-red-500 btn-xs outline-none border-none">Delete</button>
+                  <button onClick={()=> handleDenied(added_class)} className="btn btn-warning text-white bg-red-500 btn-xs outline-none border-none" disabled={added_class?.status ? true : false}>Denied</button>
                 </th>
                 <th>
-                  <button className="btn btn-warning text-white bg-blue-500 btn-xs outline-none border-none">Feedback</button>
+                  <button className="btn btn-warning text-white bg-blue-500 btn-xs outline-none border-none" disabled={added_class?.status == "denied" ? false : true}>Feedback</button>
                 </th>
               </tr>
             ))}
