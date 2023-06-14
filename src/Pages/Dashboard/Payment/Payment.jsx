@@ -3,7 +3,7 @@ import Heading from "../../../Component/Heading/Heading";
 import CheckOutForm from "./CheckOutForm";
 import { loadStripe } from "@stripe/stripe-js";
 
-const stripePromise = loadStripe('');
+const stripePromise = loadStripe(import.meta.env.VITE_Payment_PK);
 const Payment = () => {
     return (
         <section className="p-10">
