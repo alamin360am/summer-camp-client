@@ -4,11 +4,11 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 import Heading from "../../../Component/Heading/Heading";
 import { Link } from "react-router-dom";
 
-// http://localhost:5000/added_classes?email=sakib@khan.com
+// https://summer-camp-server-alamin360am.vercel.app/added_classes?email=sakib@khan.com
 const MyClass = () => {
     const {user} = useContext(AuthContext)
     const { data: added_classes = [] } = useQuery(["added_classes"], async () => {
-        const respond = await fetch(`http://localhost:5000/added_classes?email=${user?.email}`)
+        const respond = await fetch(`https://summer-camp-server-alamin360am.vercel.app/added_classes?email=${user?.email}`)
         return respond.json();
       });
 

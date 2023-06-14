@@ -13,7 +13,7 @@ const AddClass = () => {
     const seats = parseInt(availableSeats);
     const taka = parseInt(price);
     const saveData = { title: title, photoUrl: photoUrl, instructorName: instructorName, instructorEmail: instructorEmail, availableSeats: seats, price: taka, numberOfStudents: 0}
-    fetch('http://localhost:5000/added_classes', {
+    fetch('https://summer-camp-server-alamin360am.vercel.app/added_classes', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -27,7 +27,7 @@ const AddClass = () => {
             Swal.fire({
               position: 'center',
               icon: 'success',
-              title: 'Registration successful',
+              title: 'Class created successfully',
               showConfirmButton: false,
               timer: 1500
             })

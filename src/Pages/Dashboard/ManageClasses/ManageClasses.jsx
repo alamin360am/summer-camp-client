@@ -6,12 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 
 const ManageClasses = () => {
     const { data: added_classes = [], refetch } = useQuery(["added_classes"], async () => {
-        const respond = await fetch("http://localhost:5000/added_classes")
+        const respond = await fetch("https://summer-camp-server-alamin360am.vercel.app/added_classes")
         return respond.json();
       });
 
     const handleApprove = classes => {
-      fetch(`http://localhost:5000/added_classes/approved/${classes._id}`, {
+      fetch(`https://summer-camp-server-alamin360am.vercel.app/added_classes/approved/${classes._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -28,7 +28,7 @@ const ManageClasses = () => {
         }
       });
       
-      fetch('http://localhost:5000/classes', {
+      fetch('https://summer-camp-server-alamin360am.vercel.app/classes', {
         method: "POST",
         headers: {
           "content-type": "application/json"
@@ -44,7 +44,7 @@ const ManageClasses = () => {
     }
 
     const handleDenied = classes => {
-      fetch(`http://localhost:5000/added_classes/denied/${classes._id}`, {
+      fetch(`https://summer-camp-server-alamin360am.vercel.app/added_classes/denied/${classes._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())

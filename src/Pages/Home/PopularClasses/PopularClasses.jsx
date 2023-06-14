@@ -6,7 +6,7 @@ import { Slide } from "react-awesome-reveal";
 const PopularClasses = () => {
   const [classes, setClasses] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/classes")
+    fetch("https://summer-camp-server-alamin360am.vercel.app/classes")
       .then((res) => res.json())
       .then((data) => {
         const popular = data.slice(0, 6);

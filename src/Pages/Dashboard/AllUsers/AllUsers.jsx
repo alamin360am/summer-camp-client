@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 const AllUsers = () => {
   const token = localStorage.getItem("access-token");
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const respond = await fetch("http://localhost:5000/users", {
+    const respond = await fetch("https://summer-camp-server-alamin360am.vercel.app/users", {
       headers: {
         authorization: `bearer ${token}`,
       },
@@ -15,7 +15,7 @@ const AllUsers = () => {
   console.log(users);
 
   const handleMakeAdmin = (user) => {
-    fetch(`http://localhost:5000/users/admin/${user._id}`, {
+    fetch(`https://summer-camp-server-alamin360am.vercel.app/users/admin/${user._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -36,7 +36,7 @@ const AllUsers = () => {
   const handleMakeInstructor = (user) => {
     const { email, name, photoURL } = user;
     const saveUser = { email: email, name: name, photoUrl: photoURL, numberOfStudents: 0 };
-    fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+    fetch(`https://summer-camp-server-alamin360am.vercel.app/users/instructor/${user._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -53,7 +53,7 @@ const AllUsers = () => {
         }
       });
 
-    fetch("http://localhost:5000/instructor", {
+    fetch("https://summer-camp-server-alamin360am.vercel.app/instructor", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -77,7 +77,7 @@ const AllUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`https://summer-camp-server-alamin360am.vercel.app/users/${user._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

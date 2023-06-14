@@ -8,7 +8,7 @@ const useInstructor = () => {
     const {data: isInstructor} = useQuery({
         queryKey: ['isInstructor', user?.email],
         queryFn: async() =>{
-            const response = await fetch(`http://localhost:5000/users/instructor/${user?.email}`, {headers: {
+            const response = await fetch(`https://summer-camp-server-alamin360am.vercel.app/users/instructor/${user?.email}`, {headers: {
                 authorization: `bearer ${token}`
             }})
             return response.json();

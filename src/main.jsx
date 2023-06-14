@@ -98,7 +98,7 @@ const router = createBrowserRouter([
       {
         path: 'update/:id',
         element: <UpdateClass></UpdateClass>,
-        loader: ({params}) => fetch(`http://localhost:5000/added_classes/${params.id}`)
+        loader: ({params}) => fetch(`https://summer-camp-server-alamin360am.vercel.app/added_classes/${params.id}`)
       }
     ],
   },

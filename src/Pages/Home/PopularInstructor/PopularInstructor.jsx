@@ -6,7 +6,7 @@ import { Zoom } from "react-awesome-reveal";
 const PopularInstructor = () => {
   const [instructors, setInstructors] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/instructor")
+    fetch("https://summer-camp-server-alamin360am.vercel.app/instructor")
       .then((res) => res.json())
       .then((data) => {
         const popular = data.slice(0, 6);

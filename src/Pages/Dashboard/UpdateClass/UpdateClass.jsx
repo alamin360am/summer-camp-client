@@ -17,7 +17,7 @@ const UpdateClass = () => {
         const seats = parseInt(availableSeats);
         const taka = parseInt(price);
         const saveData = { title: title, photoUrl: photoUrl, instructorName: instructorName, instructorEmail: instructorEmail, availableSeats: seats, price: taka, numberOfStudents: 0}
-        fetch(`http://localhost:5000/added_classes/${added_class._id}`, {
+        fetch(`https://summer-camp-server-alamin360am.vercel.app/added_classes/${added_class._id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json",
@@ -28,7 +28,7 @@ const UpdateClass = () => {
         .then((data) => {
         console.log(data);
             Swal.fire({
-            title: "Toy Updated successfully",
+            title: "Class Updated successfully",
             showClass: {
                 popup: "animate__animated animate__fadeInDown",
             },

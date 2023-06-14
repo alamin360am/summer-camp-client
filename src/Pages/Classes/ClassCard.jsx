@@ -15,7 +15,7 @@ const ClassCard = ({ singleClass }) => {
     console.log(item);
     if(user && user.email) {
       const selectClass = {classId: _id, title, photoUrl, price, email: user.email}
-      fetch('http://localhost:5000/carts', {
+      fetch('https://summer-camp-server-alamin360am.vercel.app/carts', {
         method: "POST",
         headers: {
           "content-type": "application/json"
