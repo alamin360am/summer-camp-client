@@ -12,8 +12,10 @@ const AllUsers = () => {
     return respond.json();
   });
 
-  const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+  console.log(users);
+
+  const handleMakeAdmin = (user) => {
+    fetch(`http://localhost:5000/users/admin/${user._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -31,8 +33,10 @@ const AllUsers = () => {
       });
   };
 
-  const handleMakeInstructor = (id) => {
-    fetch(`http://localhost:5000/users/instructor/${id}`, {
+  const handleMakeInstructor = (user) => {
+    const { email, name, photoURL } = user;
+    const saveUser = { email: email, name: name, photoUrl: photoURL, numberOfStudents: 0 };
+    fetch(`http://localhost:5000/users/instructor/${user._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -48,35 +52,43 @@ const AllUsers = () => {
           });
         }
       });
+
+    fetch("http://localhost:5000/instructor", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(saveUser),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (user) => {
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You want to delete this user!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          fetch(`http://localhost:5000/users/${id}`, {
-            method: 'DELETE'
-          })
-          .then(res => res.json())
-          .then(data => {
-            if(data.deletedCount > 0) {
-                refetch();
-                Swal.fire(
-                    'Deleted!',
-                    'User deleted.',
-                    'success'
-                  )
-              }
-          })
-        }
-      })
+      title: "Are you sure?",
+      text: "You want to delete this user!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/users/${user._id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              refetch();
+              Swal.fire("Deleted!", "User deleted.", "success");
+            }
+          });
+      }
+    });
   };
 
   return (
@@ -106,7 +118,7 @@ const AllUsers = () => {
                   {user.role === "admin" && "Admin"}
                   {user.role === "instructor" && (
                     <button
-                      onClick={() => handleMakeAdmin(user._id)}
+                      onClick={() => handleMakeAdmin(user)}
                       className="btn btn-warning text-white bg-green-500 btn-xs outline-none border-none"
                     >
                       Make Admin
@@ -115,13 +127,13 @@ const AllUsers = () => {
                   {user.role !== "admin" && user.role !== "instructor" && (
                     <div className="flex flex-col gap-2">
                       <button
-                        onClick={() => handleMakeAdmin(user._id)}
+                        onClick={() => handleMakeAdmin(user)}
                         className="btn btn-warning text-white bg-green-500 btn-xs outline-none border-none"
                       >
                         Make Admin
                       </button>
                       <button
-                        onClick={() => handleMakeInstructor(user._id)}
+                        onClick={() => handleMakeInstructor(user)}
                         className="btn btn-warning text-white bg-green-500 btn-xs outline-none border-none"
                       >
                         Make Instructor
@@ -131,7 +143,7 @@ const AllUsers = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handleDelete(user._id)}
+                    onClick={() => handleDelete(user)}
                     className="btn btn-warning text-white bg-red-500 btn-xs outline-none border-none"
                   >
                     Delete
