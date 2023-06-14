@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import Heading from "../../../Component/Heading/Heading";
 import { Link } from "react-router-dom";
@@ -11,6 +11,15 @@ const MyClass = () => {
         const respond = await fetch(`https://summer-camp-server-alamin360am.vercel.app/added_classes?email=${user?.email}`)
         return respond.json();
       });
+
+    const [classes, setClasses] = useState([]);
+
+    useEffect(()=>{
+      const add = added_classes.filter(classOne => classOne.email == user.email);
+      setClasses(add)
+    },[added_classes, user]);
+
+    console.log(classes);
 
 
 
