@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ClassCard = ({ singleClass }) => {
   const { photoUrl, title, numberOfStudents, availableSeats } = singleClass;
   return (
-      <div className="flex flex-col items-center p-4 bg-white rounded-lg">
+      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
         <figure className="w-60 md:w-96 h-full mb-4">
           <img src={photoUrl} alt="" className="w-full rounded-lg" />
         </figure>

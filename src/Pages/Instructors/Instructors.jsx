@@ -16,7 +16,7 @@ const Instructors = () => {
   return (
     <section className="pt-28">
       <Heading title={"Our Instructor"}></Heading>
-      <div className="grid gird-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <div className="grid gird-cols-1 md:grid-cols-3 gap-10 mb-8">
         {
             instructors.map(instructor => <InstructorCart key={instructor._id} instructor={instructor}></InstructorCart>)
         }

@@ -52,7 +52,7 @@ const ClassCard = ({ singleClass }) => {
   }
 
   return (
-    <div className={`flex flex-col items-center p-4 ${availableSeats == 0 ? 'bg-red-400' : 'bg-white'} rounded-lg`}>
+    <div className={`flex flex-col items-center p-4 ${availableSeats == 0 ? 'bg-red-400' : 'bg-white'} rounded-lg shadow-lg`}>
       <figure className="w-96 h-full mb-4">
         <img src={photoUrl} alt="" className="w-full rounded-lg" />
       </figure>

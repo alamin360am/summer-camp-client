@@ -1,15 +1,33 @@
 // import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import Heading from "../../../Component/Heading/Heading";
 import { useQuery } from "@tanstack/react-query";
 
 
 const ManageClasses = () => {
-
-
     const { data: added_classes = [], refetch } = useQuery(["added_classes"], async () => {
         const respond = await fetch("http://localhost:5000/added_classes")
         return respond.json();
       });
+
+    const handleApprove = classes => {
+      fetch(`http://localhost:5000/added_classes/approved/${classes._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Make admin successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+    }
 
     return (
         <section className="p-10">
@@ -57,9 +75,12 @@ const ManageClasses = () => {
                     <p><span>Price:</span> {added_class.price}</p>
                 </td>
                 <td>
+                  <p>
+                    {added_class?.status ? added_class?.status : "Pending"}
+                  </p>
                 </td>
                 <th>
-                  <button className="btn btn-primary bg-green-600 btn-xs outline-none border-none">Approve</button>
+                  <button onClick={()=>handleApprove(added_class)} className="btn btn-primary bg-green-600 btn-xs outline-none border-none">Approve</button>
                 </th>
                 <th>
                   <button className="btn btn-warning text-white bg-red-500 btn-xs outline-none border-none">Delete</button>

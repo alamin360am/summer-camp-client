@@ -18,7 +18,7 @@ const PopularClasses = () => {
       <section className="my-10">
         <Heading title="Popular Classes"></Heading>
         <Slide>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {classes.map((singleClass) => (
             <ClassCard
               key={singleClass._id}
