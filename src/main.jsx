@@ -23,6 +23,7 @@ import {
 import AllUsers from "./Pages/Dashboard/AllUsers/AllUsers";
 import AddClass from "./Pages/Dashboard/AddClass/AddClass";
 import ManageClasses from "./Pages/Dashboard/ManageClasses/ManageClasses";
+import MyClass from "./Pages/Dashboard/MyClass/MyClass";
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
       {
         path: 'manage-classes',
         element: <ManageClasses></ManageClasses>
+      },
+      {
+        path: 'my-class',
+        element: <MyClass></MyClass>
       }
     ],
   },
