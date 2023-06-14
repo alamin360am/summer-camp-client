@@ -5,7 +5,7 @@ const ClassCard = ({ singleClass }) => {
   const { photoUrl, title, numberOfStudents, availableSeats } = singleClass;
   return (
       <div className="flex flex-col items-center p-4 bg-white rounded-lg">
-        <figure className="w-96 h-full mb-4">
+        <figure className="w-60 md:w-96 h-full mb-4">
           <img src={photoUrl} alt="" className="w-full rounded-lg" />
         </figure>
         <h3 className="text-2xl font-semibold text-black mb-2">{title}</h3>
