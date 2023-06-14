@@ -23,6 +23,12 @@ const DashboardNav = () => {
             Admin Home
           </NavLink>
           <NavLink
+            to="manage-classes"
+            className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
+          >
+            Manage Classes
+          </NavLink>
+          <NavLink
             to="users"
             className="text-white text-lg px-3 py-2 mb-2 rounded hover:bg-green-950"
           >

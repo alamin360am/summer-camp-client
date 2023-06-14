@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useCart from "../../Hook/useCart";
-import useAdmin from "../../Hook/useAdmin";
-import useInstructor from "../../Hook/useInstructor";
 
 const ClassCard = ({ singleClass }) => {
   const { photoUrl, title, numberOfStudents, instructorName, availableSeats, price, _id } = singleClass;
@@ -12,21 +10,6 @@ const ClassCard = ({ singleClass }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [, refetch] = useCart();
-  const [isAdmin] = useAdmin();
-  const admin = isAdmin?.admin;
-  const [isInstructor] = useInstructor();
-  const instructor = isInstructor?.instructor;
-
-  const [disable, setDisable] = useState(true);
-
-  useEffect(()=>{
-    if(admin == false && instructor == false) {
-      setDisable(false)
-    }
-    if(instructor == true) {
-      setDisable(true)
-    }
-  },[admin, instructor])
 
   const handleAddCart = item => {
     console.log(item);
@@ -81,7 +64,7 @@ const ClassCard = ({ singleClass }) => {
       </div>
       <p className="text-2xl mb-4">Price: <span className="text-green-600 font-bold">${price}</span></p>
       {
-        <button onClick={()=> handleAddCart(singleClass)} disabled={disable} className="btn btn-outline text-green-700 hover:bg-green-700 hover:outline-none hover:text-white">
+        <button onClick={()=> handleAddCart(singleClass)} disabled={availableSeats == 0 ? true : false} className="btn btn-outline text-green-700 hover:bg-green-700 hover:outline-none hover:text-white">
         Select Class
       </button>
       }

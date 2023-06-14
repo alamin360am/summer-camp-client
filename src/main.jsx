@@ -22,6 +22,7 @@ import {
 } from "@tanstack/react-query";
 import AllUsers from "./Pages/Dashboard/AllUsers/AllUsers";
 import AddClass from "./Pages/Dashboard/AddClass/AddClass";
+import ManageClasses from "./Pages/Dashboard/ManageClasses/ManageClasses";
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
       {
         path: 'add-class',
         element: <AddClass></AddClass>
+      },
+      {
+        path: 'manage-classes',
+        element: <ManageClasses></ManageClasses>
       }
     ],
   },
